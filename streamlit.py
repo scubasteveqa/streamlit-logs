@@ -25,13 +25,10 @@ logger.addHandler(stderr_handler)
 # Streamlit app
 st.title('Streamlit Logging Example')
 
-# Buttons to trigger log messages
-if st.button('Log Info to stdout'):
-    st.write('Logging an info message to stdout')
-    logger.info('This is an info message logged to stdout')
+# Log messages to stdout and stderr
+logger.info('This is an info message logged to stdout')
+logger.error('This is an error message logged to stderr')
 
-if st.button('Log Error to stderr'):
-    st.write('Logging an error message to stderr')
-    logger.error('This is an error message logged to stderr')
-
+st.write('Logged an info message to stdout.')
+st.write('Logged an error message to stderr.')
 st.write('Check the console for log messages.')
