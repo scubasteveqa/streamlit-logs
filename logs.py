@@ -42,14 +42,15 @@ log_display = st.empty()
 
 # Function to continually update and display the logs
 def update_logs():
-    # Initially, update the log output once
-    new_logs = log_stream.getvalue()
+    # Initially, capture the logs and display them in the text_area
+    new_logs = log_stream.getvalue()  # Read the current log content
     log_display.text_area("Log Output", new_logs, height=300, key="log_output")  # Set unique key
     
+    # Continuously capture and update logs every second
     while True:
         time.sleep(1)  # Update the log every second
-        new_logs = log_stream.getvalue()  # Read the current log content
-        log_display.text_area("Log Output", new_logs, height=300, key=f"log_output_{time.time()}")  # Unique key
+        new_logs = log_stream.getvalue()  # Get the current log content
+        log_display.text_area("Log Output", new_logs, height=300, key=f"log_output_{time.time()}")  # Update the logs
 
 # Call the function to update the logs
 if __name__ == '__main__':
