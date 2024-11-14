@@ -27,18 +27,25 @@ stderr_handler.setFormatter(stderr_formatter)
 logger.addHandler(stdout_handler)
 logger.addHandler(stderr_handler)
 
-# Streamlit app
+# Streamlit app title
 st.title('Streamlit Logging Example')
-
-# Log messages to stdout and stderr
-logger.info('This is an info message logged to stdout')
-logger.error('This is an error message logged to stderr')
 
 # Streamlit display for logs
 st.write('### Logs:')
 
 # Create an empty placeholder for log output
 log_display = st.empty()
+
+# Create a text input for the user to add custom log messages
+log_input = st.text_area("Enter log message", "", height=100)
+
+# Button to log the message entered by the user
+if st.button("Log Message"):
+    if log_input:
+        logger.info(log_input)  # Log the input message as an info message
+        st.success("Message logged successfully!")
+    else:
+        st.warning("Please enter a log message.")
 
 # Function to continually update and display the logs
 def update_logs():
