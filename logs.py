@@ -37,15 +37,16 @@ logger.error('This is an error message logged to stderr')
 # Streamlit display for logs
 st.write('### Logs:')
 
-# Display the entire log
-log_display = st.text_area("Log Output", log_stream.getvalue(), height=300)
+# Create a text area widget to display the entire log content
+log_display = st.text_area("Log Output", "", height=300)
 
 # Function to continually update and display the logs
 def update_logs():
     while True:
         time.sleep(1)  # Update the log every second
         new_logs = log_stream.getvalue()  # Read the current log content
-        log_display.text_area("Log Output", new_logs, height=300)  # Update the displayed log
+        log_display = st.text_area("Log Output", new_logs, height=300)  # Update the displayed log
 
-# Call the function to update the logs
-update_logs()
+# Call the function to update the logs (ensure this part doesn't block the UI)
+if __name__ == '__main__':
+    update_logs()
