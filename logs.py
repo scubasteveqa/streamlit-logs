@@ -2,7 +2,6 @@ import streamlit as st
 import logging
 import sys
 import io
-import time
 
 # Configure logging
 logger = logging.getLogger()
@@ -34,23 +33,10 @@ st.title('Streamlit Logging Example')
 logger.info('This is an info message logged to stdout')
 logger.error('This is an error message logged to stderr')
 
-# Streamlit display for logs
+# Display the captured logs in the Streamlit app
 st.write('### Logs:')
+st.text(log_stream.getvalue())  # Display the logs from the in-memory stream
 
-# Create an empty placeholder for log output
-log_display = st.empty()
-
-# Function to continually update and display the logs
-def update_logs():
-    # Initially, update the log output once
-    new_logs = log_stream.getvalue()
-    log_display.text_area("Log Output", new_logs, height=300, key="log_output")  # Set unique key
-    
-    while True:
-        time.sleep(1)  # Update the log every second
-        new_logs = log_stream.getvalue()  # Read the current log content
-        log_display.text_area("Log Output", new_logs, height=300, key=f"log_output_{time.time()}")  # Unique key
-
-# Call the function to update the logs
-if __name__ == '__main__':
-    update_logs()
+# Optionally, you can also show the original messages in the console
+st.write('Logged an info message to stdout.')
+st.write('Logged an error message to stderr.')
