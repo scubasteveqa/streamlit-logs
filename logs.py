@@ -42,8 +42,11 @@ def update_logs():
         # Get the current log content from the log stream
         new_logs = log_stream.getvalue()
 
+        # Generate a unique key based on the current time to avoid duplicates
+        unique_key = f"log_output_{time.time()}"
+
         # Update the displayed logs in the text area with the new logs
-        log_display.text_area("Log Output", new_logs, height=300, key="log_output")
+        log_display.text_area("Log Output", new_logs, height=300, key=unique_key)
         
         # Pause for a second to simulate periodic log updates
         time.sleep(1)
