@@ -30,10 +30,6 @@ logger.addHandler(stderr_handler)
 # Streamlit app
 st.title('Streamlit Logging Example')
 
-# Log messages to stdout and stderr
-logger.info('This is an info message logged to stdout')
-logger.error('This is an error message logged to stderr')
-
 # Streamlit display for logs
 st.write('### Logs:')
 
@@ -49,8 +45,13 @@ def update_logs():
         # Display logs with a unique key based on the current time
         log_display.text_area("Log Output", new_logs, height=300, key=f"log_output_{time.time()}")
         
-        # Sleep to simulate log update (in real use, this would be event-based or something else)
+        # Sleep to simulate periodic log updates
         time.sleep(1)
+
+# Test logging during setup and application runtime
+logger.info("Starting application setup...")
+logger.debug("Setting up environment...")
+logger.error("Environment setup error: Something went wrong")
 
 # Call the function to update the logs
 if __name__ == '__main__':
